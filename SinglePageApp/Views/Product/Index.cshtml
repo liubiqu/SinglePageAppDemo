@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<script type="text/javascript" src="~/Scripts/Application/Product.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        window.ko.applyBindings(new ProductViewModel());
+    });
+
+</script>
+
+<div id="divProductList" style="display: block">
+    <h2>可用的产品列表</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>产品编码</th>
+                <th>产品名称</th>
+                <th>价格</th>
+                <th>数量</th>
+                <th colspan="2">操作</th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: products">
+            <tr>
+                <td data-bind="text: productCode"></td>
+                <td data-bind="text: productName"></td>
+                <td data-bind="text: productPrice"></td>
+                <td data-bind="text: productQty"></td>
+                <td><a href="#" data-bind="click: $root.editProduct">编辑</a></td>
+                <td><a href="#" data-bind="click: $root.removeProduct">删除</a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div id="divEditProduct" style="display: none">
+    <h2>编辑产品</h2>
+    <div data-bind="with: currentProduct">
+        <p>产品编码：<input type="text" data-bind="value: productCode" disabled="disabled" /></p>
+        <p>产品名称：<input type="text" data-bind="value: productName" /></p>
+        <p>价格：<input type="text" data-bind="value: productPrice" /></p>
+        <p>数量：<input type="text" data-bind="value: productQty" /></p>
+    </div>
+</div>
+
